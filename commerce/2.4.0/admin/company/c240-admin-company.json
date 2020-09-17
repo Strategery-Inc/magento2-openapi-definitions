@@ -1,0 +1,662 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2.4",
+        "title": "Magento B2B Company"
+    },
+    "host": "mc24.test",
+    "basePath": "/rest/all",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "companyCompanyRepositoryV1",
+            "description": "A repository interface for company entity that provides basic CRUD operations."
+        }
+    ],
+    "paths": {
+        "/V1/company/": {
+            "get": {
+                "tags": [
+                    "companyCompanyRepositoryV1"
+                ],
+                "description": "Returns the list of companies. The list is an array of objects, and detailed information about item attributes might not be included.",
+                "operationId": "companyCompanyRepositoryV1GetListGet",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "searchCriteria[filterGroups][0][filters][0][field]",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Field"
+                    },
+                    {
+                        "name": "searchCriteria[filterGroups][0][filters][0][value]",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Value"
+                    },
+                    {
+                        "name": "searchCriteria[filterGroups][0][filters][0][conditionType]",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Condition type"
+                    },
+                    {
+                        "name": "searchCriteria[sortOrders][0][field]",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Sorting field."
+                    },
+                    {
+                        "name": "searchCriteria[sortOrders][0][direction]",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Sorting direction."
+                    },
+                    {
+                        "name": "searchCriteria[pageSize]",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "Page size."
+                    },
+                    {
+                        "name": "searchCriteria[currentPage]",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "Current page."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "200 Success.",
+                        "schema": {
+                            "$ref": "#/definitions/company-data-company-search-results-interface"
+                        }
+                    },
+                    "401": {
+                        "description": "401 Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server error",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "companyCompanyRepositoryV1"
+                ],
+                "description": "Create or update a company account.",
+                "operationId": "companyCompanyRepositoryV1SavePost",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyCompanyRepositoryV1SavePostBody",
+                        "in": "body",
+                        "schema": {
+                            "required": [
+                                "company"
+                            ],
+                            "properties": {
+                                "company": {
+                                    "$ref": "#/definitions/company-data-company-interface"
+                                }
+                            },
+                            "type": "object",
+                            "xml": {
+                                "name": "request"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "200 Success.",
+                        "schema": {
+                            "$ref": "#/definitions/company-data-company-interface"
+                        }
+                    },
+                    "401": {
+                        "description": "401 Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "400": {
+                        "description": "400 Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    }
+                }
+            }
+        },
+        "/V1/company/{companyId}": {
+            "get": {
+                "tags": [
+                    "companyCompanyRepositoryV1"
+                ],
+                "description": "Returns company details.",
+                "operationId": "companyCompanyRepositoryV1GetGet",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyId",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "200 Success.",
+                        "schema": {
+                            "$ref": "#/definitions/company-data-company-interface"
+                        }
+                    },
+                    "401": {
+                        "description": "401 Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "400": {
+                        "description": "400 Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "companyCompanyRepositoryV1"
+                ],
+                "description": "Delete a company. Customers belonging to a company are not deleted with this request.",
+                "operationId": "companyCompanyRepositoryV1DeleteByIdDelete",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyId",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "200 Success.",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "401": {
+                        "description": "401 Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "400": {
+                        "description": "400 Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "companyCompanyRepositoryV1"
+                ],
+                "description": "Create or update a company account.",
+                "operationId": "companyCompanyRepositoryV1SavePut",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyId",
+                        "in": "path",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "companyCompanyRepositoryV1SavePutBody",
+                        "in": "body",
+                        "schema": {
+                            "required": [
+                                "company"
+                            ],
+                            "properties": {
+                                "company": {
+                                    "$ref": "#/definitions/company-data-company-interface"
+                                }
+                            },
+                            "type": "object",
+                            "xml": {
+                                "name": "request"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "200 Success.",
+                        "schema": {
+                            "$ref": "#/definitions/company-data-company-interface"
+                        }
+                    },
+                    "401": {
+                        "description": "401 Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "400": {
+                        "description": "400 Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/error-response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "error-response": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Error message"
+                },
+                "errors": {
+                    "$ref": "#/definitions/error-errors"
+                },
+                "code": {
+                    "type": "integer",
+                    "description": "Error code"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/error-parameters"
+                },
+                "trace": {
+                    "type": "string",
+                    "description": "Stack trace"
+                }
+            },
+            "required": [
+                "message"
+            ]
+        },
+        "error-errors": {
+            "type": "array",
+            "description": "Errors list",
+            "items": {
+                "$ref": "#/definitions/error-errors-item"
+            }
+        },
+        "error-errors-item": {
+            "type": "object",
+            "description": "Error details",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Error message"
+                },
+                "parameters": {
+                    "$ref": "#/definitions/error-parameters"
+                }
+            }
+        },
+        "error-parameters": {
+            "type": "array",
+            "description": "Error parameters list",
+            "items": {
+                "$ref": "#/definitions/error-parameters-item"
+            }
+        },
+        "error-parameters-item": {
+            "type": "object",
+            "description": "Error parameters item",
+            "properties": {
+                "resources": {
+                    "type": "string",
+                    "description": "ACL resource"
+                },
+                "fieldName": {
+                    "type": "string",
+                    "description": "Missing or invalid field name"
+                },
+                "fieldValue": {
+                    "type": "string",
+                    "description": "Incorrect field value"
+                }
+            }
+        },
+        "company-data-company-search-results-interface": {
+            "type": "object",
+            "description": "Interface for company search results",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "Companies list",
+                    "items": {
+                        "$ref": "#/definitions/company-data-company-interface"
+                    }
+                },
+                "search_criteria": {
+                    "$ref": "#/definitions/framework-search-criteria-interface"
+                },
+                "total_count": {
+                    "type": "integer",
+                    "description": "Total count."
+                }
+            },
+            "required": [
+                "items",
+                "search_criteria",
+                "total_count"
+            ]
+        },
+        "company-data-company-interface": {
+            "type": "object",
+            "description": "Interface for Company entity.",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Id."
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "Status."
+                },
+                "company_name": {
+                    "type": "string",
+                    "description": "Company name."
+                },
+                "legal_name": {
+                    "type": "string",
+                    "description": "Legal name."
+                },
+                "company_email": {
+                    "type": "string",
+                    "description": "Company email."
+                },
+                "vat_tax_id": {
+                    "type": "string",
+                    "description": "Vat tax id."
+                },
+                "reseller_id": {
+                    "type": "string",
+                    "description": "Reseller Id."
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "Comment."
+                },
+                "street": {
+                    "type": "array",
+                    "description": "Street.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City."
+                },
+                "country_id": {
+                    "type": "string",
+                    "description": "Country."
+                },
+                "region": {
+                    "type": "string",
+                    "description": "Region."
+                },
+                "region_id": {
+                    "type": "string",
+                    "description": "Region Id."
+                },
+                "postcode": {
+                    "type": "string",
+                    "description": "Postcode."
+                },
+                "telephone": {
+                    "type": "string",
+                    "description": "Telephone."
+                },
+                "customer_group_id": {
+                    "type": "integer",
+                    "description": "Customer Group Id."
+                },
+                "sales_representative_id": {
+                    "type": "integer",
+                    "description": "Sales Representative Id."
+                },
+                "reject_reason": {
+                    "type": "string",
+                    "description": "Reject Reason."
+                },
+                "rejected_at": {
+                    "type": "string",
+                    "description": "Rejected at time."
+                },
+                "super_user_id": {
+                    "type": "integer",
+                    "description": "Company admin customer id."
+                },
+                "extension_attributes": {
+                    "$ref": "#/definitions/company-data-company-extension-interface"
+                }
+            },
+            "required": [
+                "street",
+                "customer_group_id",
+                "sales_representative_id",
+                "reject_reason",
+                "rejected_at",
+                "super_user_id"
+            ]
+        },
+        "company-data-company-extension-interface": {
+            "type": "object",
+            "description": "ExtensionInterface class for @see \\Magento\\Company\\Api\\Data\\CompanyInterface",
+            "properties": {
+                "applicable_payment_method": {
+                    "type": "integer"
+                },
+                "available_payment_methods": {
+                    "type": "string"
+                },
+                "use_config_settings": {
+                    "type": "integer"
+                },
+                "quote_config": {
+                    "$ref": "#/definitions/negotiable-quote-data-company-quote-config-interface"
+                },
+                "is_purchase_order_enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "negotiable-quote-data-company-quote-config-interface": {
+            "type": "object",
+            "description": "Interface CompanyQuoteConfigInterface",
+            "properties": {
+                "company_id": {
+                    "type": "string",
+                    "description": "Company id"
+                },
+                "is_quote_enabled": {
+                    "type": "boolean",
+                    "description": "Quote enabled for company"
+                },
+                "extension_attributes": {
+                    "$ref": "#/definitions/negotiable-quote-data-company-quote-config-extension-interface"
+                }
+            },
+            "required": [
+                "is_quote_enabled"
+            ]
+        },
+        "negotiable-quote-data-company-quote-config-extension-interface": {
+            "type": "object",
+            "description": "ExtensionInterface class for @see \\Magento\\NegotiableQuote\\Api\\Data\\CompanyQuoteConfigInterface"
+        },
+        "framework-search-criteria-interface": {
+            "type": "object",
+            "description": "Search criteria interface.",
+            "properties": {
+                "filter_groups": {
+                    "type": "array",
+                    "description": "A list of filter groups.",
+                    "items": {
+                        "$ref": "#/definitions/framework-search-filter-group"
+                    }
+                },
+                "sort_orders": {
+                    "type": "array",
+                    "description": "Sort order.",
+                    "items": {
+                        "$ref": "#/definitions/framework-sort-order"
+                    }
+                },
+                "page_size": {
+                    "type": "integer",
+                    "description": "Page size."
+                },
+                "current_page": {
+                    "type": "integer",
+                    "description": "Current page."
+                }
+            },
+            "required": [
+                "filter_groups"
+            ]
+        },
+        "framework-search-filter-group": {
+            "type": "object",
+            "description": "Groups two or more filters together using a logical OR",
+            "properties": {
+                "filters": {
+                    "type": "array",
+                    "description": "A list of filters in this group",
+                    "items": {
+                        "$ref": "#/definitions/framework-filter"
+                    }
+                }
+            }
+        },
+        "framework-filter": {
+            "type": "object",
+            "description": "Filter which can be used by any methods from service layer.",
+            "properties": {
+                "field": {
+                    "type": "string",
+                    "description": "Field"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Value"
+                },
+                "condition_type": {
+                    "type": "string",
+                    "description": "Condition type"
+                }
+            },
+            "required": [
+                "field",
+                "value"
+            ]
+        },
+        "framework-sort-order": {
+            "type": "object",
+            "description": "Data object for sort order.",
+            "properties": {
+                "field": {
+                    "type": "string",
+                    "description": "Sorting field."
+                },
+                "direction": {
+                    "type": "string",
+                    "description": "Sorting direction."
+                }
+            },
+            "required": [
+                "field",
+                "direction"
+            ]
+        }
+    }
+}
